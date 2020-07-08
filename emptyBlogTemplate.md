@@ -1,9 +1,9 @@
 ---
 title: "Blog-Title"
 date: "Blog-Date"
-layout: post
-draft: true
-path: "/posts/Blog-Path/"
+template: post
+draft: false
+slug: "Blog-Slug"
 category: "Blog-Category"
 tags: Blog-Tags
 description: "Blog-Description"

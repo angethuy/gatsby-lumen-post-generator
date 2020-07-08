@@ -2,7 +2,7 @@
 const fs = require('fs'),
   path = require('path')
 
-const articlesDir = path.join(__dirname, `../../src/pages/articles/`)
+const articlesDir = path.join(__dirname, `../../content/posts/`)
 
 // parse commandline parameters, returning 'value' for every getParam(key)
 const getParam = arg =>
@@ -43,7 +43,7 @@ const makeBlogDir = () => {
     console.log(dir)
     try {
       if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir)
+        // fs.mkdirSync(dir)
         resolve({ message: 'Directory Created' })
       }
       reject('Directory Already Exists With That Blog Title')
@@ -69,7 +69,7 @@ const readBlogTemplate = blog => {
           .replace(/Blog-Description/g, description)
           .replace(/Blog-Tags/g, tags)
           .replace(
-            /Blog-Path/g,
+            /Blog-Slug/g,
             title
               .toLowerCase()
               .replace(/ /g, '-')
@@ -90,7 +90,7 @@ const writeBlogTemplate = blog => {
   if (blog.message) console.log(blog.message)
 
   const promise = new Promise((resolve, reject) => {
-    fs.writeFile(path.join(getDirectory(), '/index.md'), blog.data, err => {
+    fs.writeFile(getDirectory() + '.md', blog.data, err => {
       if (err) reject(err)
       resolve('The file was saved!')
     })
